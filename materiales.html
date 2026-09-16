@@ -59,17 +59,22 @@
     font-family:'Inter';font-size:.85rem;font-weight:600;display:grid;place-items:center;flex:none}
   .blk h2 .mk.moss{background:var(--moss)}
   .blk > p{color:var(--ink2);max-width:70ch}
-  .tablecard{border:1px solid var(--line);border-radius:14px;overflow:hidden;margin:14px 0 6px}
-  table{width:100%;border-collapse:collapse;font-size:.92rem}
-  thead th{background:var(--card);text-align:left;padding:11px 14px;font-weight:600;font-size:.8rem;
-    color:var(--ink2);border-bottom:1px solid var(--line)}
+  .tablecard{border:1px solid var(--line);border-radius:14px;overflow-x:auto;overflow-y:hidden;margin:14px 0 6px;-webkit-overflow-scrolling:touch}
+  table{width:100%;border-collapse:collapse;font-size:.9rem;min-width:0}
+  thead th{background:var(--card);text-align:left;padding:10px 12px;font-weight:600;font-size:.76rem;
+    color:var(--ink2);border-bottom:1px solid var(--line);white-space:nowrap}
   thead th.num{text-align:right}
-  tbody td{padding:11px 14px;border-bottom:1px solid var(--line)}
+  tbody td{padding:10px 12px;border-bottom:1px solid var(--line);font-size:.86rem}
+  tbody td:first-child{min-width:130px}
   tbody tr:last-child td{border-bottom:none}
-  tbody td.num{text-align:right;font-family:'Spline Sans Mono',monospace;font-size:.86rem;white-space:nowrap}
+  tbody td.num{text-align:right;font-family:'Spline Sans Mono',monospace;font-size:.8rem;white-space:nowrap}
   tbody tr:hover{background:color-mix(in srgb,var(--card) 60%,transparent)}
-  tfoot td{padding:12px 14px;font-weight:600;background:var(--card);border-top:2px solid var(--line)}
-  tfoot td.num{text-align:right;font-family:'Spline Sans Mono',monospace}
+  tfoot td{padding:11px 12px;font-weight:600;background:var(--card);border-top:2px solid var(--line);font-size:.88rem}
+  tfoot td.num{text-align:right;font-family:'Spline Sans Mono',monospace;white-space:nowrap}
+  @media(max-width:560px){
+    tbody td:first-child,thead th:first-child{position:sticky;left:0;background:var(--paper);z-index:1}
+    tbody tr:hover td:first-child{background:var(--card)}
+  }
   .muted{color:var(--ink2);font-size:.8rem}
   ol.steps{list-style:none;counter-reset:s;padding:0;margin:16px 0}
   ol.steps li{counter-increment:s;position:relative;padding:14px 16px 14px 54px;border:1px solid var(--line);
@@ -131,6 +136,34 @@
 </style>
 </head>
 <body>
+<div id="loginGate" style="position:fixed;inset:0;z-index:9999;background:#efe9dd;display:flex;align-items:center;justify-content:center;font-family:'Inter',system-ui,sans-serif">
+  <div style="max-width:340px;width:90%;text-align:center;padding:32px 28px;background:#f8f4ea;border:1px solid #d6ccb8;border-radius:18px;box-shadow:0 8px 40px rgba(60,48,30,.12)">
+    <div style="font-family:'Fraunces',serif;font-weight:600;font-size:1.6rem;color:#23201b;margin-bottom:6px">Casa-Refugio</div>
+    <div style="font-size:.85rem;color:#5a544a;margin-bottom:22px">Proyecto privado · ingresá para ver</div>
+    <input id="gu" placeholder="Usuario" autocomplete="off" style="width:100%;padding:11px 14px;margin-bottom:10px;border:1px solid #d6ccb8;border-radius:10px;background:#efe9dd;color:#23201b;font-size:.95rem;box-sizing:border-box">
+    <input id="gp" type="password" placeholder="Clave" style="width:100%;padding:11px 14px;margin-bottom:8px;border:1px solid #d6ccb8;border-radius:10px;background:#efe9dd;color:#23201b;font-size:.95rem;box-sizing:border-box">
+    <div id="gerr" style="color:#a9502c;font-size:.82rem;min-height:18px;margin-bottom:8px"></div>
+    <button id="gb" style="width:100%;padding:12px;border:none;border-radius:10px;background:#8a5a34;color:#fff;font-size:.95rem;font-weight:600;cursor:pointer">Entrar</button>
+  </div>
+</div>
+<script>
+(function(){
+  var U="Refugio", P="1234", K="clr_auth_ok";
+  var gate=document.getElementById('loginGate');
+  function ok(){ gate.style.display='none'; }
+  try{ if(sessionStorage.getItem(K)==='1'){ ok(); } }catch(e){}
+  function tryLogin(){
+    var u=document.getElementById('gu').value.trim();
+    var p=document.getElementById('gp').value;
+    if(u===U && p===P){ try{sessionStorage.setItem(K,'1')}catch(e){} ok(); }
+    else{ document.getElementById('gerr').textContent='Usuario o clave incorrectos'; }
+  }
+  document.getElementById('gb').addEventListener('click',tryLogin);
+  document.getElementById('gp').addEventListener('keydown',function(e){ if(e.key==='Enter')tryLogin(); });
+  document.getElementById('gu').addEventListener('keydown',function(e){ if(e.key==='Enter')document.getElementById('gp').focus(); });
+})();
+</script>
+
 <header class="top"><div class="wrap">
   <div class="brand"><span class="b1">Casa-Refugio</span><span class="b2">Villa Las Rosas · Traslasierra</span></div>
   <a class="navback" href="index.html">Proyecto</a>
@@ -145,8 +178,9 @@
     <a class="chip" href="instalaciones.html">6 · Instalaciones</a>
     <a class="chip" href="cerramientos.html">7 · Cerramientos internos</a>
     <a class="chip" href="terminaciones.html">8 · Terminaciones</a>
+    <a class="chip" href="costos.html">Costo total</a>
     <a class="chip active" href="materiales.html">Materiales</a>
-</div></nav>
+  </div></nav>
 <main class="wrap">
   <div class="hero">
     <p class="kicker">Consolidado</p>
@@ -156,8 +190,8 @@
   </div>
 
   <div class="grandtotal">
-    <div><div class="lbl">Total de obra</div><div class="sub">45,36 m² · $963.746 /m² · USD 630 /m²</div></div>
-    <div class="amt">$43,7 M</div>
+    <div><div class="lbl">Total de obra</div><div class="sub">45,36 m² · $949.364 /m² · USD 28146</div></div>
+    <div class="amt">$43.063.171</div>
   </div>
   <div class="note"><b>Con mano de obra propia:</b> el total baja a ~$34,4 M (pagando solo la conducción técnica).
   <b>Cortando la caña en el terreno:</b> se ahorran ~$3,4 M más. Las dos palancas juntas dejan la casa en el orden de $31 M.</div>
@@ -355,7 +389,7 @@
   mueven rápido: revisá y actualizá estos valores antes de cada compra grande.</div>
 
   <nav class="pager">
-    <a class="pgbtn" href="terminaciones.html"><span class="dir">← Anterior</span><div class="t">8 · Terminaciones</div></a>
+    <a class="pgbtn" href="costos.html"><span class="dir">← Anterior</span><div class="t">Costo total</div></a>
     <a class="pgbtn next disabled"><span class="dir">Siguiente</span><div class="t">—</div></a>
   </nav>
 </main>

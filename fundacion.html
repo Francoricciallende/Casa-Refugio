@@ -97,17 +97,22 @@
   .blk > p{color:var(--ink2);max-width:70ch}
 
   /* ---- materials table ---- */
-  .tablecard{border:1px solid var(--line);border-radius:14px;overflow:hidden;margin:14px 0 6px}
-  table{width:100%;border-collapse:collapse;font-size:.92rem}
-  thead th{background:var(--card);text-align:left;padding:11px 14px;font-weight:600;font-size:.8rem;
-    color:var(--ink2);border-bottom:1px solid var(--line)}
+  .tablecard{border:1px solid var(--line);border-radius:14px;overflow-x:auto;overflow-y:hidden;margin:14px 0 6px;-webkit-overflow-scrolling:touch}
+  table{width:100%;border-collapse:collapse;font-size:.9rem;min-width:0}
+  thead th{background:var(--card);text-align:left;padding:10px 12px;font-weight:600;font-size:.76rem;
+    color:var(--ink2);border-bottom:1px solid var(--line);white-space:nowrap}
   thead th.num{text-align:right}
-  tbody td{padding:11px 14px;border-bottom:1px solid var(--line)}
+  tbody td{padding:10px 12px;border-bottom:1px solid var(--line);font-size:.86rem}
+  tbody td:first-child{min-width:130px}
   tbody tr:last-child td{border-bottom:none}
-  tbody td.num{text-align:right;font-family:'Spline Sans Mono',monospace;font-size:.86rem;white-space:nowrap}
+  tbody td.num{text-align:right;font-family:'Spline Sans Mono',monospace;font-size:.8rem;white-space:nowrap}
   tbody tr:hover{background:color-mix(in srgb,var(--card) 60%,transparent)}
-  tfoot td{padding:12px 14px;font-weight:600;background:var(--card);border-top:2px solid var(--line)}
-  tfoot td.num{text-align:right;font-family:'Spline Sans Mono',monospace}
+  tfoot td{padding:11px 12px;font-weight:600;background:var(--card);border-top:2px solid var(--line);font-size:.88rem}
+  tfoot td.num{text-align:right;font-family:'Spline Sans Mono',monospace;white-space:nowrap}
+  @media(max-width:560px){
+    tbody td:first-child,thead th:first-child{position:sticky;left:0;background:var(--paper);z-index:1}
+    tbody tr:hover td:first-child{background:var(--card)}
+  }
   .muted{color:var(--ink2);font-size:.8rem}
 
   /* ---- steps ---- */
@@ -162,6 +167,34 @@
 </style>
 </head>
 <body>
+<div id="loginGate" style="position:fixed;inset:0;z-index:9999;background:#efe9dd;display:flex;align-items:center;justify-content:center;font-family:'Inter',system-ui,sans-serif">
+  <div style="max-width:340px;width:90%;text-align:center;padding:32px 28px;background:#f8f4ea;border:1px solid #d6ccb8;border-radius:18px;box-shadow:0 8px 40px rgba(60,48,30,.12)">
+    <div style="font-family:'Fraunces',serif;font-weight:600;font-size:1.6rem;color:#23201b;margin-bottom:6px">Casa-Refugio</div>
+    <div style="font-size:.85rem;color:#5a544a;margin-bottom:22px">Proyecto privado · ingresá para ver</div>
+    <input id="gu" placeholder="Usuario" autocomplete="off" style="width:100%;padding:11px 14px;margin-bottom:10px;border:1px solid #d6ccb8;border-radius:10px;background:#efe9dd;color:#23201b;font-size:.95rem;box-sizing:border-box">
+    <input id="gp" type="password" placeholder="Clave" style="width:100%;padding:11px 14px;margin-bottom:8px;border:1px solid #d6ccb8;border-radius:10px;background:#efe9dd;color:#23201b;font-size:.95rem;box-sizing:border-box">
+    <div id="gerr" style="color:#a9502c;font-size:.82rem;min-height:18px;margin-bottom:8px"></div>
+    <button id="gb" style="width:100%;padding:12px;border:none;border-radius:10px;background:#8a5a34;color:#fff;font-size:.95rem;font-weight:600;cursor:pointer">Entrar</button>
+  </div>
+</div>
+<script>
+(function(){
+  var U="Refugio", P="1234", K="clr_auth_ok";
+  var gate=document.getElementById('loginGate');
+  function ok(){ gate.style.display='none'; }
+  try{ if(sessionStorage.getItem(K)==='1'){ ok(); } }catch(e){}
+  function tryLogin(){
+    var u=document.getElementById('gu').value.trim();
+    var p=document.getElementById('gp').value;
+    if(u===U && p===P){ try{sessionStorage.setItem(K,'1')}catch(e){} ok(); }
+    else{ document.getElementById('gerr').textContent='Usuario o clave incorrectos'; }
+  }
+  document.getElementById('gb').addEventListener('click',tryLogin);
+  document.getElementById('gp').addEventListener('keydown',function(e){ if(e.key==='Enter')tryLogin(); });
+  document.getElementById('gu').addEventListener('keydown',function(e){ if(e.key==='Enter')document.getElementById('gp').focus(); });
+})();
+</script>
+
 
 <header class="top">
   <div class="wrap">
@@ -181,6 +214,7 @@
     <a class="chip" href="instalaciones.html">6 · Instalaciones</a>
     <a class="chip" href="cerramientos.html">7 · Cerramientos internos</a>
     <a class="chip" href="terminaciones.html">8 · Terminaciones</a>
+    <a class="chip" href="costos.html">Costo total</a>
     <a class="chip" href="materiales.html">Materiales</a>
   </div>
 </nav>
@@ -188,7 +222,7 @@
 <main class="wrap">
 
   <div class="hero">
-    <p class="kicker">Rubro 1 de 8</p>
+    <p class="kicker">Etapa 1 de 8</p>
     <h1>Fundación</h1>
     <p class="lead">Quince pilotines altos de hormigón que elevan la casa un metro sobre el
     terreno. Seis reciben las columnas de la estructura; los otros nueve sostienen la plataforma
@@ -206,7 +240,7 @@
     <div class="fig"><div class="n">1,45<small> m</small></div><div class="l">altura del fuste</div></div>
     <div class="fig"><div class="n">1,87<small> m³</small></div><div class="l">hormigón H-21</div></div>
     <div class="fig"><div class="n">37,1<small> t</small></div><div class="l">carga total</div></div>
-    <div class="fig"><div class="n">$2,06<small> M</small></div><div class="l">costo del rubro</div></div>
+    <div class="fig"><div class="n">$2,06<small> M</small></div><div class="l">costo de la etapa</div></div>
   </div>
 
   <!-- QUÉ SE HACE -->
@@ -274,7 +308,7 @@
 
   <!-- MATERIALES -->
   <section class="blk">
-    <h2><span class="mk">▦</span>Materiales del rubro</h2>
+    <h2><span class="mk">▦</span>Materiales de la etapa</h2>
     <p>Cantidades netas con desperdicio ya incluido. La tierra de la excavación se criba y se
     reutiliza para el barro de las paredes, así que no se computa.</p>
     <div class="tablecard">
@@ -296,20 +330,18 @@
     </div>
     <div class="tablecard">
       <table>
-        <thead><tr><th>Mano de obra</th><th class="num">Horas</th><th class="num">Jornal</th><th class="num">Subtotal</th></tr></thead>
+        <thead><tr><th>Tarea</th><th class="num">Horas</th><th class="num">Nivel</th><th class="num">Valor/h</th><th class="num">Subtotal</th></tr></thead>
         <tbody>
-          <tr><td>Excavación manual (15 pozos)</td><td class="num">60 h</td><td class="num">$10.600</td><td class="num">$636.000</td></tr>
-          <tr><td>Armado y hormigonado</td><td class="num">45 h</td><td class="num">$10.600</td><td class="num">$477.000</td></tr>
+          <tr><td>Excavación de 15 pozos</td><td class="num">60 h</td><td class="num">Peón</td><td class="num">$6.500</td><td class="num">$390.000</td></tr>
+          <tr><td>Armado y hormigonado</td><td class="num">45 h</td><td class="num">Oficial</td><td class="num">$11.000</td><td class="num">$495.000</td></tr>
         </tbody>
-        <tfoot>
-          <tr><td>Subtotal mano de obra</td><td class="num"></td><td class="num"></td><td class="num">$1.113.000</td></tr>
-        </tfoot>
+        <tfoot><tr><td>Subtotal mano de obra</td><td class="num">105 h</td><td class="num"></td><td class="num"></td><td class="num">$885.000</td></tr></tfoot>
       </table>
     </div>
     <div class="tablecard">
       <table>
         <tfoot>
-          <tr><td><b>Total del rubro Fundación</b></td><td class="num"></td><td class="num"></td><td class="num"><b>$2.064.118</b></td></tr>
+          <tr><td><b>Total de la etapa Fundación</b></td><td class="num"></td><td class="num"></td><td class="num"><b>$1.836.118</b></td></tr>
         </tfoot>
       </table>
     </div>
@@ -318,6 +350,17 @@
   </section>
 
   <!-- PASO A PASO -->
+  <section class="blk">
+    <h2><span class="mk">◔</span>Dirección y asistencia técnica</h2>
+    <p>El director no está toda la jornada: da las instrucciones al inicio del día y controla el trabajo al
+    cierre. Para esta etapa se estiman <b>14 horas</b> de dirección y asistencia técnica (replanteo y nivelación son críticos).</p>
+    <div class="tablecard"><table>
+      <thead><tr><th>Concepto</th><th class="num">Horas est.</th><th class="num">Valor/h est.</th><th class="num">Monto estimado</th></tr></thead>
+      <tbody><tr><td>Supervisión y control de obra</td><td class="num">14 h</td><td class="num">$13.000</td><td class="num">$182.000</td></tr></tbody>
+    </table></div>
+    <p class="muted">Valor de referencia de un supervisor con experiencia media (sin título). El valor final se acuerda con quien dirija la obra.
+    El cálculo estructural y los planos municipales los firma un profesional matriculado aparte.</p>
+  </section>
   <section class="blk">
     <h2><span class="mk moss">→</span>Paso a paso de obra</h2>
     <ol class="steps">
