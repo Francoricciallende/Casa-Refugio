@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paredes · Casa-Refugio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=Spline+Sans+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#23201b;--ink2:#5a544a;--paper:#efe9dd;--card:#f8f4ea;--line:#d6ccb8;
+    --clay:#8a5a34;--clay-soft:#c69a6d;--moss:#4f6b3f;--rust:#a9502c;--done:#3f6b4a;
+    --wall:#8a7a5c;--glass:#7fa8c4;--door:#b0623a;--dim:#3f8f6f}
+  @media (prefers-color-scheme:dark){:root:not([data-theme=light]){--ink:#ece5d8;--ink2:#a89f8d;
+    --paper:#211e19;--card:#2a2620;--line:#3d372d;--clay:#c99a6b;--clay-soft:#8a6742;--moss:#8aa670;
+    --rust:#d07a4e;--done:#7bab7f;--wall:#a8956f;--glass:#6f9dbd;--door:#c0714a;--dim:#5faf8a}}
+  :root[data-theme=dark]{--ink:#ece5d8;--ink2:#a89f8d;--paper:#211e19;--card:#2a2620;--line:#3d372d;
+    --clay:#c99a6b;--clay-soft:#8a6742;--moss:#8aa670;--rust:#d07a4e;--done:#7bab7f;--wall:#a8956f;
+    --glass:#6f9dbd;--door:#c0714a;--dim:#5faf8a}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:'Inter',system-ui,sans-serif;
+    line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:940px;margin:0 auto;padding:0 20px}
+  header.top{border-bottom:1px solid var(--line);background:color-mix(in srgb,var(--paper) 88%,transparent);
+    position:sticky;top:0;z-index:20;backdrop-filter:blur(8px)}
+  .top .wrap{display:flex;align-items:center;justify-content:space-between;height:58px}
+  .brand{display:flex;align-items:baseline;gap:10px;font-family:'Fraunces',serif;font-weight:600}
+  .brand .b1{font-size:1.15rem}.brand .b2{font-size:.8rem;color:var(--ink2);font-family:'Inter'}
+  .navback{font-size:.85rem;color:var(--clay);text-decoration:none;border:1px solid var(--line);
+    padding:6px 12px;border-radius:100px;white-space:nowrap}
+  .navback:hover{background:var(--card)}
+  .strip{border-bottom:1px solid var(--line);background:var(--card)}
+  .strip .wrap{display:flex;gap:6px;overflow-x:auto;padding:10px 20px;scrollbar-width:none}
+  .strip .wrap::-webkit-scrollbar{display:none}
+  .chip{font-size:.76rem;color:var(--ink2);white-space:nowrap;padding:5px 11px;border-radius:100px;
+    border:1px solid transparent;text-decoration:none}
+  .chip.active{background:var(--clay);color:#fff;font-weight:500}
+  .chip:not(.active):hover{border-color:var(--line)}
+  .hero{padding:40px 0 26px}
+  .kicker{font-size:.8rem;color:var(--clay);font-weight:600;margin:0 0 8px}
+  .hero h1{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(2.1rem,6vw,3.2rem);
+    line-height:1.02;margin:0 0 14px;letter-spacing:-.01em}
+  .hero p.lead{font-size:1.05rem;color:var(--ink2);max-width:64ch;margin:0}
+  .progwrap{margin:22px 0 8px;display:flex;align-items:center;gap:14px}
+  .progbar{flex:1;height:10px;background:var(--line);border-radius:100px;overflow:hidden}
+  .progfill{height:100%;background:linear-gradient(90deg,var(--moss),var(--done));width:0;
+    transition:width .5s cubic-bezier(.4,0,.2,1)}
+  .progtxt{font-family:'Spline Sans Mono',monospace;font-size:.85rem;color:var(--ink2);min-width:118px;text-align:right}
+  .savednote{font-size:.78rem;color:var(--moss);margin-top:8px;min-height:16px;transition:opacity .3s}
+  .figs{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1px;
+    background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin:26px 0}
+  .fig{background:var(--card);padding:16px 18px}
+  .fig .n{font-family:'Fraunces',serif;font-size:1.7rem;font-weight:600;line-height:1;color:var(--ink)}
+  .fig .n small{font-size:.9rem;color:var(--ink2);font-weight:400}
+  .fig .l{font-size:.78rem;color:var(--ink2);margin-top:6px}
+  section.blk{padding:14px 0}
+  .blk h2{font-family:'Fraunces',serif;font-weight:600;font-size:1.5rem;margin:26px 0 4px;
+    display:flex;align-items:center;gap:12px}
+  .blk h2 .mk{width:26px;height:26px;border-radius:8px;background:var(--clay);color:#fff;
+    font-family:'Inter';font-size:.85rem;font-weight:600;display:grid;place-items:center;flex:none}
+  .blk h2 .mk.moss{background:var(--moss)}
+  .blk > p{color:var(--ink2);max-width:70ch}
+  .tablecard{border:1px solid var(--line);border-radius:14px;overflow:hidden;margin:14px 0 6px}
+  table{width:100%;border-collapse:collapse;font-size:.92rem}
+  thead th{background:var(--card);text-align:left;padding:11px 14px;font-weight:600;font-size:.8rem;
+    color:var(--ink2);border-bottom:1px solid var(--line)}
+  thead th.num{text-align:right}
+  tbody td{padding:11px 14px;border-bottom:1px solid var(--line)}
+  tbody tr:last-child td{border-bottom:none}
+  tbody td.num{text-align:right;font-family:'Spline Sans Mono',monospace;font-size:.86rem;white-space:nowrap}
+  tbody tr:hover{background:color-mix(in srgb,var(--card) 60%,transparent)}
+  tfoot td{padding:12px 14px;font-weight:600;background:var(--card);border-top:2px solid var(--line)}
+  tfoot td.num{text-align:right;font-family:'Spline Sans Mono',monospace}
+  .muted{color:var(--ink2);font-size:.8rem}
+  ol.steps{list-style:none;counter-reset:s;padding:0;margin:16px 0}
+  ol.steps li{counter-increment:s;position:relative;padding:14px 16px 14px 54px;border:1px solid var(--line);
+    border-radius:12px;margin-bottom:10px;background:var(--card)}
+  ol.steps li::before{content:counter(s);position:absolute;left:14px;top:14px;width:26px;height:26px;
+    background:var(--paper);border:1px solid var(--line);border-radius:8px;
+    font-family:'Spline Sans Mono',monospace;font-size:.85rem;display:grid;place-items:center;color:var(--clay)}
+  ol.steps li b{display:block;margin-bottom:3px;font-weight:600;font-size:.98rem}
+  ol.steps li span{color:var(--ink2);font-size:.9rem}
+  .checkcard{border:1px solid var(--line);border-radius:14px;background:var(--card);padding:6px 4px;margin:14px 0}
+  .chkitem{display:flex;gap:13px;align-items:flex-start;padding:13px 16px;border-bottom:1px solid var(--line);cursor:pointer}
+  .chkitem:last-child{border-bottom:none}
+  .chkbox{width:24px;height:24px;border:2px solid var(--clay-soft);border-radius:7px;flex:none;margin-top:1px;
+    display:grid;place-items:center;transition:all .18s}
+  .chkbox svg{width:14px;height:14px;opacity:0;transform:scale(.4);transition:all .2s}
+  .chkitem.on .chkbox{background:var(--done);border-color:var(--done)}
+  .chkitem.on .chkbox svg{opacity:1;transform:scale(1)}
+  .chktext{font-size:.95rem}
+  .chkitem.on .chktext{color:var(--ink2);text-decoration:line-through;text-decoration-color:var(--clay-soft)}
+  .chkhint{display:block;font-size:.78rem;color:var(--ink2);margin-top:2px;text-decoration:none!important}
+  .note{border-left:3px solid var(--clay);background:var(--card);padding:14px 16px;border-radius:0 12px 12px 0;
+    margin:16px 0;font-size:.92rem}
+  .note.warn{border-left-color:var(--rust)}
+  .note b{color:var(--ink)}
+  .plano{border:1px solid var(--line);border-radius:14px;background:var(--card);padding:18px;margin:14px 0;overflow-x:auto}
+  .plano svg{display:block;margin:0 auto;max-width:100%;height:auto}
+  .plano.scroll svg{min-width:460px}
+  .plano .cap{font-size:.8rem;color:var(--ink2);text-align:center;margin-top:10px;line-height:1.4}
+  .planotitle{font-family:'Spline Sans Mono',monospace;font-size:.8rem;color:var(--clay);margin:0 0 4px;
+    text-transform:uppercase;letter-spacing:.04em}
+  .pager{display:flex;justify-content:space-between;gap:12px;margin:34px 0 50px;flex-wrap:wrap}
+  .pgbtn{flex:1;min-width:200px;border:1px solid var(--line);border-radius:14px;padding:16px 18px;
+    text-decoration:none;background:var(--card);transition:border-color .15s}
+  .pgbtn:hover{border-color:var(--clay)}
+  .pgbtn .dir{font-size:.75rem;color:var(--ink2)}
+  .pgbtn .t{font-family:'Fraunces',serif;font-weight:600;font-size:1.05rem;color:var(--ink);margin-top:3px}
+  .pgbtn.next{text-align:right}
+  .pgbtn.disabled{opacity:.4;pointer-events:none}
+  .reset{background:none;border:none;color:var(--ink2);font-size:.78rem;text-decoration:underline;
+    cursor:pointer;padding:0;margin-top:10px}
+  svg text{font-family:'Inter',sans-serif}
+  .dimt{font-family:'Spline Sans Mono',monospace;font-size:11px;fill:var(--dim)}
+  .lblt{font-size:12px;font-weight:600;fill:var(--ink)}
+  .subt{font-size:10px;fill:var(--ink2)}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <div class="brand"><span class="b1">Casa-Refugio</span><span class="b2">Villa Las Rosas · Traslasierra</span></div>
+    <a class="navback" href="index.html">Proyecto</a>
+  </div>
+</header>
+<nav class="strip" aria-label="Secciones de obra">
+  <div class="wrap">
+    <a class="chip" href="index.html">Proyecto y planos</a>
+    <a class="chip" href="fundacion.html">1 · Fundación</a>
+    <a class="chip" href="piso.html">2 · Piso</a>
+    <a class="chip" href="columnas.html">3 · Columnas</a>
+    <a class="chip" href="techo.html">4 · Techo</a>
+    <a class="chip active" href="paredes.html">5 · Paredes</a>
+    <a class="chip" href="instalaciones.html">6 · Instalaciones</a>
+    <a class="chip" href="cerramientos.html">7 · Cerramientos internos</a>
+    <a class="chip" href="terminaciones.html">8 · Terminaciones</a>
+    <a class="chip" href="materiales.html">Materiales</a>
+  </div>
+</nav>
+<main class="wrap">
+  <div class="hero">
+    <p class="kicker">Rubro 5 de 8</p>
+    <h1>Paredes</h1>
+    <p class="lead">El cierre de quincha entre las columnas: bastidor, caña, barro y cal. No cargan el techo, solo aíslan y dan masa térmica. La etapa más larga de la obra.</p>
+    <div class="progwrap">
+      <div class="progbar"><div class="progfill" id="fill"></div></div>
+      <div class="progtxt" id="ptxt">0 pasos</div>
+    </div>
+    <div class="savednote" id="saved"></div>
+  </div>
+  <div class="figs">
+    <div class="fig"><div class="n">197<small> m²</small></div><div class="l">superficie encañada</div></div>
+    <div class="fig"><div class="n">8,7<small> m³</small></div><div class="l">barro-paja</div></div>
+    <div class="fig"><div class="n">1.350</div><div class="l">cañas</div></div>
+    <div class="fig"><div class="n">617<small> h</small></div><div class="l">mano de obra</div></div>
+    <div class="fig"><div class="n">$13,6<small> M</small></div><div class="l">costo del rubro</div></div>
+  </div>
+
+  <section class="blk">
+    <h2><span class="mk">i</span>Qué se hace en esta etapa</h2>
+    <p>Con la casa ya techada, se cierran las paredes de quincha entre las columnas. Primero el bastidor de
+    madera (que no carga el techo, solo sostiene el barro), después el encañado en las dos caras, el relleno
+    de barro-paja, y por último los revoques de tierra terminados en cal. Es la etapa más larga de la obra:
+    casi la mitad de las horas totales.</p>
+    <div class="note"><b>Las paredes cierran, no sostienen.</b> El techo ya está parado sobre las columnas. La quincha
+    entra entre medio: aísla, da masa térmica y cierra. Por eso el bastidor puede ser más liviano que en un sistema portante.</div>
+  </section>
+  <section class="blk">
+    <h2><span class="mk">▦</span>Materiales del rubro</h2>
+    <div class="tablecard">
+      <table>
+        <thead><tr><th>Bastidor y arriostramiento</th><th class="num">Cantidad</th><th class="num">P. unit.</th><th class="num">Subtotal</th></tr></thead>
+        <tbody>
+          <tr><td>Bastidor pino 2"×4"</td><td class="num">465 ml</td><td class="num">$4.200</td><td class="num">$2.148.300</td></tr>
+          <tr><td>Fenólico 12 mm (arriostramiento)</td><td class="num">10 placas</td><td class="num">$44.000</td><td class="num">$440.000</td></tr>
+        </tbody>
+        <tfoot><tr><td>Subtotal bastidor</td><td class="num"></td><td class="num"></td><td class="num">$2.588.300</td></tr></tfoot>
+      </table>
+    </div>
+    <div class="tablecard">
+      <table>
+        <thead><tr><th>Quincha</th><th class="num">Cantidad</th><th class="num">P. unit.</th><th class="num">Subtotal</th></tr></thead>
+        <tbody>
+          <tr><td>Caña de Castilla 3 m</td><td class="num">1.350 u</td><td class="num">$2.500</td><td class="num">$3.375.000</td></tr>
+          <tr><td>Paja · fardos 20 kg</td><td class="num">55 u</td><td class="num">$9.000</td><td class="num">$495.000</td></tr>
+          <tr><td>Cal aérea · bolsas 25 kg</td><td class="num">10 u</td><td class="num">$18.000</td><td class="num">$180.000</td></tr>
+          <tr><td>Arena fina y mediana</td><td class="num">6 m³</td><td class="num">$35.000</td><td class="num">$210.000</td></tr>
+          <tr><td>Sales de boro</td><td class="num">25 kg</td><td class="num">$8.500</td><td class="num">$212.500</td></tr>
+        </tbody>
+        <tfoot><tr><td>Subtotal quincha</td><td class="num"></td><td class="num"></td><td class="num">$4.472.500</td></tr></tfoot>
+      </table>
+    </div>
+    <div class="tablecard">
+      <table>
+        <thead><tr><th>Mano de obra</th><th class="num">Cantidad</th><th class="num">P. unit.</th><th class="num">Subtotal</th></tr></thead>
+        <tbody>
+          <tr><td>Bastidor</td><td class="num">95 h</td><td class="num">$10.600</td><td class="num">$1.007.000</td></tr>
+          <tr><td>Encañado</td><td class="num">158 h</td><td class="num">$10.600</td><td class="num">$1.674.800</td></tr>
+          <tr><td>Relleno de barro</td><td class="num">52 h</td><td class="num">$10.600</td><td class="num">$551.200</td></tr>
+          <tr><td>Revoques barro y cal</td><td class="num">312 h</td><td class="num">$10.600</td><td class="num">$3.307.200</td></tr>
+        </tbody>
+        <tfoot><tr><td>Subtotal mano de obra</td><td class="num"></td><td class="num"></td><td class="num">$6.540.200</td></tr></tfoot>
+      </table>
+    </div>
+    <div class="tablecard"><table><tfoot><tr><td><b>Total del rubro Paredes</b></td><td class="num"></td><td class="num"></td><td class="num"><b>$13.601.000</b></td></tr></tfoot></table></div>
+    <p class="muted">La tierra sale de la excavación (no se computa). Si cortás la caña en el terreno en otoño, ahorrás ~$3,4 M.</p>
+  </section>
+  <section class="blk">
+    <h2><span class="mk moss">→</span>Paso a paso de obra</h2>
+    <ol class="steps">
+      <li><b>Prueba de la tierra</b><span>Antes de mezclar, prueba del frasco: sirve una tierra con 15-25% de arcilla. Prueba de mano: si la bola se rompe falta arcilla, si queda pegajosa sobra.</span></li>
+      <li><b>Bastidor entre columnas</b><span>Armar los bastidores 2"×4" acostados sobre la plataforma, marcar y levantar entre las columnas. Bloqueos horizontales cada 1,20. Montante doble en extremos y vanos.</span></li>
+      <li><b>Instalaciones en el muro</b><span>Pasar las cañerías eléctricas corrugadas y cajas ANTES de encañar. Agua y cloaca mejor por tabiques interiores o la cámara.</span></li>
+      <li><b>Encañado</b><span>Partir la caña y clavarla horizontal cada 0,05 en las dos caras. Empalmar solapando 0,15 sobre un montante. Dejar la caña 1 cm saliente para que agarre el revoque.</span></li>
+      <li><b>Relleno de barro-paja</b><span>Mezcla tierra:paja 1:1, densidad ~900 kg/m³. Cargar por tongadas de 0,40 empujando con la mano contra las cañas. Sin pisón mecánico: revienta la caña.</span></li>
+      <li><b>Secado</b><span>2 a 3 semanas con la casa techada y aberturas abiertas. Control del clavo: si sale húmedo, todavía no. Revocar sobre barro húmedo = fisuras cada año.</span></li>
+      <li><b>Revoque grueso</b><span>Tierra:arena 1:2 con paja picada, apretado contra la caña. Rayar en cruz antes de que endurezca para que agarre el fino. Secar una semana.</span></li>
+      <li><b>Revoque fino y terminación</b><span>Tierra cribada:arena 1:3. Zócalo de 0,30 en cal, no en barro. Exterior en cal aérea, nunca cemento: el muro tiene que secar hacia afuera.</span></li>
+    </ol>
+  </section>
+  <div class="note warn"><b>Nunca revoque de cemento.</b> Sella el muro, la humedad queda atrapada del lado del barro
+  y la madera se pudre sin que se note. El zócalo (primeros 30 cm) va en cal directa: es la franja que recibe el rebote de la lluvia.</div>
+
+  <section class="blk">
+    <h2><span class="mk moss">✓</span>Marcar avance</h2>
+    <p>Tocá cada paso a medida que se completa en obra. Se guarda en este dispositivo.</p>
+    <div class="checkcard" id="checklist">
+      <div class="chkitem" data-id="w1"><div class="chkbox"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="chktext">Prueba de tierra hecha (15-25% arcilla)</div></div>
+      <div class="chkitem" data-id="w2"><div class="chkbox"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="chktext">Bastidores armados entre columnas</div></div>
+      <div class="chkitem" data-id="w3"><div class="chkbox"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="chktext">Instalaciones pasadas antes de encañar</div></div>
+      <div class="chkitem" data-id="w4"><div class="chkbox"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="chktext">Encañado completo en las dos caras</div></div>
+      <div class="chkitem" data-id="w5"><div class="chkbox"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="chktext">Relleno de barro-paja cargado</div></div>
+      <div class="chkitem" data-id="w6"><div class="chkbox"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="chktext">Secado verificado (prueba del clavo)<span class=chkhint>2 a 3 semanas</span></div></div>
+      <div class="chkitem" data-id="w7"><div class="chkbox"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="chktext">Revoque grueso aplicado y rayado</div></div>
+      <div class="chkitem" data-id="w8"><div class="chkbox"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="chktext">Revoque fino y zócalo de cal terminados</div></div>
+    </div>
+    <button class="reset" id="resetbtn">Reiniciar avance de esta sección</button>
+  </section>
+  <nav class="pager">
+    <a class="pgbtn" href="techo.html"><span class="dir">← Anterior</span><div class="t">4 · Techo</div></a>
+    <a class="pgbtn next" href="instalaciones.html"><span class="dir">Siguiente →</span><div class="t">6 · Instalaciones</div></a>
+  </nav>
+</main>
+<script>
+  var KEY='clr_paredes';
+  var items=[].slice.call(document.querySelectorAll('.chkitem'));
+  var fill=document.getElementById('fill'),ptxt=document.getElementById('ptxt'),saved=document.getElementById('saved');
+  function load(){try{return JSON.parse(localStorage.getItem(KEY))||{}}catch(e){return {}}}
+  var ft;function flash(m){saved.textContent=m;saved.style.opacity=1;clearTimeout(ft);ft=setTimeout(function(){saved.style.opacity=0},1800)}
+  function persist(s){try{localStorage.setItem(KEY,JSON.stringify(s));flash('Guardado en este dispositivo')}catch(e){flash('No se pudo guardar')}}
+  function render(s){var d=0;items.forEach(function(el){if(s[el.dataset.id]){el.classList.add('on');d++}else el.classList.remove('on')});
+    var t=items.length;fill.style.width=Math.round(d/t*100)+'%';ptxt.textContent=d+' de '+t+' pasos'}
+  var st=load();render(st);
+  items.forEach(function(el){el.addEventListener('click',function(){st[el.dataset.id]=!st[el.dataset.id];render(st);persist(st)})});
+  document.getElementById('resetbtn').addEventListener('click',function(){st={};render(st);persist(st)});
+</script>
+</body>
+</html>
