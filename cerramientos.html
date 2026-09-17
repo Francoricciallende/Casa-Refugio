@@ -29,13 +29,19 @@
   .navback{font-size:.85rem;color:var(--clay);text-decoration:none;border:1px solid var(--line);
     padding:6px 12px;border-radius:100px;white-space:nowrap}
   .navback:hover{background:var(--card)}
-  .strip{border-bottom:1px solid var(--line);background:var(--card)}
-  .strip .wrap{display:flex;gap:6px;overflow-x:auto;padding:10px 20px;scrollbar-width:none}
-  .strip .wrap::-webkit-scrollbar{display:none}
-  .chip{font-size:.76rem;color:var(--ink2);white-space:nowrap;padding:5px 11px;border-radius:100px;
-    border:1px solid transparent;text-decoration:none}
+  .strip{border-bottom:1px solid var(--line);background:var(--card);position:sticky;top:58px;z-index:19}
+  .strip-wrap{position:relative}
+  .strip-wrap::after{content:"";position:absolute;right:0;top:0;bottom:0;width:36px;pointer-events:none;
+    background:linear-gradient(90deg,transparent,var(--card));border-radius:0}
+  .strip .wrap{display:flex;gap:5px;overflow-x:auto;padding:9px 20px;scrollbar-width:thin;
+    scroll-behavior:smooth;-webkit-overflow-scrolling:touch}
+  .strip .wrap::-webkit-scrollbar{height:3px}
+  .strip .wrap::-webkit-scrollbar-thumb{background:var(--clay-soft);border-radius:2px}
+  .chip{font-size:.74rem;color:var(--ink2);white-space:nowrap;padding:5px 10px;border-radius:100px;
+    border:1px solid transparent;text-decoration:none;flex:none}
   .chip.active{background:var(--clay);color:#fff;font-weight:500}
-  .chip:not(.active):hover{border-color:var(--line)}
+  .chip:not(.active){background:var(--paper);border-color:var(--line)}
+  .chip:not(.active):hover{border-color:var(--clay-soft)}
   .hero{padding:40px 0 26px}
   .kicker{font-size:.8rem;color:var(--clay);font-weight:600;margin:0 0 8px}
   .hero h1{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(2.1rem,6vw,3.2rem);
@@ -158,19 +164,20 @@
   </div>
 </header>
 <nav class="strip" aria-label="Secciones de obra">
-  <div class="wrap">
-    <a class="chip" href="index.html">Proyecto y planos</a>
-    <a class="chip" href="fundacion.html">1 · Fundación</a>
-    <a class="chip" href="piso.html">2 · Piso</a>
-    <a class="chip" href="columnas.html">3 · Columnas</a>
-    <a class="chip" href="techo.html">4 · Techo</a>
-    <a class="chip" href="paredes.html">5 · Paredes</a>
-    <a class="chip" href="instalaciones.html">6 · Instalaciones</a>
-    <a class="chip active" href="cerramientos.html">7 · Cerramientos internos</a>
-    <a class="chip" href="terminaciones.html">8 · Terminaciones</a>
+  <div class="strip-wrap"><div class="wrap">
+    <a class="chip" href="index.html">Proyecto</a>
+    <a class="chip" href="fundacion.html">1·Fundación</a>
+    <a class="chip" href="piso.html">2·Piso</a>
+    <a class="chip" href="columnas.html">3·Columnas</a>
+    <a class="chip" href="techo.html">4·Techo</a>
+    <a class="chip" href="paredes.html">5·Paredes</a>
+    <a class="chip" href="instalaciones.html">6·Instalaciones</a>
+    <a class="chip active" href="cerramientos.html">7·Cerramientos</a>
+    <a class="chip" href="terminaciones.html">8·Terminaciones</a>
+    <a class="chip" href="cronograma.html">Cronograma</a>
     <a class="chip" href="costos.html">Costo total</a>
     <a class="chip" href="materiales.html">Materiales</a>
-  </div>
+  </div></div>
 </nav>
 <main class="wrap">
   <div class="hero">
