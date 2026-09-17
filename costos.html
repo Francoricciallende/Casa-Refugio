@@ -183,7 +183,6 @@
   document.getElementById('gu').addEventListener('keydown',function(e){ if(e.key==='Enter')document.getElementById('gp').focus(); });
 })();
 </script>
-
 <header class="top"><div class="wrap">
   <div class="brand"><span class="b1">Casa-Refugio</span><span class="b2">Villa Las Rosas · Traslasierra</span></div>
   <a class="navback" href="index.html">Proyecto</a>
@@ -200,94 +199,73 @@
     <a class="chip" href="terminaciones.html">8 · Terminaciones</a>
     <a class="chip active" href="costos.html">Costo total</a>
     <a class="chip" href="materiales.html">Materiales</a>
-  </div></nav>
+</div></nav>
 <main class="wrap">
   <div class="hero">
     <p class="kicker">Estimación</p>
     <h1>Costo total</h1>
-    <p class="lead">El costo completo de la obra, separado en obra gris (estructura y cierre) y terminaciones,
-    con el desglose de materiales, mano de obra y dirección por etapa. Todos los valores son estimados de
-    referencia para Córdoba Capital, septiembre 2026.</p>
+    <p class="lead">El costo completo de la obra, separado en tres grupos: obra gris, instalaciones y
+    terminaciones. Cada etapa se desglosa en materiales, mano de obra y dirección. Todos los valores son
+    estimados de referencia para Córdoba Capital, septiembre 2026.</p>
   </div>
 
   <div class="grandtotal">
-    <div><div class="lbl">Total de obra</div><div class="sub">45,36 m² · $949.364 /m² · USD 28146</div></div>
-    <div class="amt">$43.063.171</div>
+    <div><div class="lbl">Total de obra</div><div class="sub">45,36 m² · $962.712 /m² · USD 28542</div></div>
+    <div class="amt">$43.668.601</div>
   </div>
 
   <div class="tabs">
-    <div class="tab active" onclick="sw('etapa',this)">Por etapa</div>
-    <div class="tab" onclick="sw('grupo',this)">Gris vs terminaciones</div>
+    <div class="tab active" onclick="sw('grupo',this)">Grupos</div>
+    <div class="tab" onclick="sw('etapa',this)">Por etapa</div>
+    <div class="tab" onclick="sw('materiales',this)">Solo materiales</div>
     <div class="tab" onclick="sw('mo',this)">Niveles de mano de obra</div>
   </div>
 
-  <!-- VISTA POR ETAPA -->
-  <div class="view active" id="view-etapa">
-    <div class="tablecard"><table>
-      <thead><tr><th>Etapa</th><th class="num">Materiales</th><th class="num">Mano obra</th><th class="num">Dirección</th><th class="num">Total</th></tr></thead>
-      <tbody>
-          <tr><td>Fundación</td><td class="num">$951.118</td><td class="num">$885.000</td><td class="num">$182.000</td><td class="num">$2.018.118</td></tr>
-          <tr><td>Piso</td><td class="num">$3.119.380</td><td class="num">$550.000</td><td class="num">$52.000</td><td class="num">$3.721.380</td></tr>
-          <tr><td>Columnas</td><td class="num">$568.000</td><td class="num">$440.000</td><td class="num">$65.000</td><td class="num">$1.073.000</td></tr>
-          <tr><td>Techo</td><td class="num">$7.796.073</td><td class="num">$843.000</td><td class="num">$156.000</td><td class="num">$8.795.073</td></tr>
-          <tr><td>Paredes</td><td class="num">$7.060.800</td><td class="num">$5.062.000</td><td class="num">$507.000</td><td class="num">$12.629.800</td></tr>
-          <tr><td>Instalaciones</td><td class="num">$2.400.000</td><td class="num">$1.020.000</td><td class="num">$156.000</td><td class="num">$3.576.000</td></tr>
-          <tr><td>Cerramientos</td><td class="num">$777.000</td><td class="num">$689.000</td><td class="num">$52.000</td><td class="num">$1.518.000</td></tr>
-          <tr><td>Terminaciones</td><td class="num">$8.790.800</td><td class="num">$850.000</td><td class="num">$91.000</td><td class="num">$9.731.800</td></tr>
-      </tbody>
-      <tfoot><tr><td>TOTAL</td><td class="num">$31.463.171</td><td class="num">$10.339.000</td><td class="num">$1.261.000</td><td class="num">$43.063.171</td></tr></tfoot>
-    </table></div>
-    <p class="muted">La dirección técnica suma $1.261.000 (2,9%). La mano de obra, $10.339.000 — que baja a casi cero si se aporta trabajo propio.</p>
-  </div>
-
-  <!-- VISTA GRIS VS TERMINACIONES -->
-  <div class="view" id="view-grupo">
+  <!-- VISTA GRUPOS -->
+  <div class="view active" id="view-grupo">
     <p style="color:var(--ink2);max-width:70ch;margin-bottom:4px">Tocá cada etapa para ver el detalle de qué se
     consideró en materiales, mano de obra y dirección.</p>
-
-    <div class="note"><b>Tres grupos separados.</b> La <b>obra gris</b> es lo que negociás con el director. Las
-    <b>instalaciones</b> van por tu cuenta (profesionales propios, fuera del director). Las <b>terminaciones</b>
-    se pueden estirar en el tiempo según el presupuesto.</div>
-
+    <div class="note"><b>Tres grupos.</b> La <b>obra gris</b> es la casa en pie, cerrada y techada. Las
+    <b>instalaciones</b> las ejecutan profesionales propios (electricista y gasista), coordinadas por el
+    propietario. Las <b>terminaciones</b> se pueden estirar en el tiempo según el presupuesto.</div>
     <div class="grupo-head" style="border-left:4px solid var(--clay)">
       <div><div class="grupo-t">Obra gris</div><div class="grupo-s">Fundación, piso, columnas, techo y paredes</div></div>
-      <div class="grupo-amt">$28.237.371</div>
+      <div class="grupo-amt">$29.203.301</div>
     </div>
     <div class="grupo-desglose">
-      <span>Materiales $19.495.371</span>
-      <span>Mano de obra $7.780.000</span>
-      <span>Dirección $962.000</span>
+      <span>Materiales $19.200.301</span>
+      <span>Mano de obra $7.702.000</span>
+      <span>Dirección $2.301.000</span>
     </div>
     <details class="acc">
       <summary>
         <span class="acc-name">Fundación</span>
-        <span class="acc-total">$2.018.118</span>
+        <span class="acc-total">$1.736.048</span>
       </summary>
       <div class="acc-body">
-        <div class="acc-sub">Materiales · $951.118</div>
+        <div class="acc-sub">Materiales · $656.048</div>
         <div class="tablecard"><table><tbody>
-<tr><td>Hormigón H-21</td><td class="num">1,87 m³</td><td class="num">$345.950</td></tr>
-<tr><td>Acero (Ø10,Ø8,Ø6)</td><td class="num">83 kg</td><td class="num">$199.472</td></tr>
-<tr><td>Brocas Ø12</td><td class="num">30 u</td><td class="num">$144.000</td></tr>
-<tr><td>Excavación (mat.)</td><td class="num"></td><td class="num">$261.696</td></tr>
+<tr><td>Hormigón H-21</td><td class="num">1,69 m³</td><td class="num">$312.576</td></tr>
+<tr><td>Acero (Ø10,Ø8,Ø6)</td><td class="num">91 kg</td><td class="num">$199.472</td></tr>
+<tr><td>Brocas Ø12</td><td class="num">12 u</td><td class="num">$144.000</td></tr>
         </tbody></table></div>
-        <div class="acc-sub">Mano de obra · $885.000 · 105 h</div>
+        <div class="acc-sub">Mano de obra · $807.000 · 93 h</div>
         <div class="tablecard"><table>
           <thead><tr><th>Tarea</th><th class="num">Horas</th><th class="num">Nivel</th><th class="num">Valor/h</th><th class="num">Subtotal</th></tr></thead>
           <tbody>
-<tr><td>Excavación 15 pozos</td><td class="num">60 h</td><td class="num">Peón</td><td class="num">$6.500</td><td class="num">$390.000</td></tr>
+<tr><td>Excavación 12 pozos</td><td class="num">48 h</td><td class="num">Peón</td><td class="num">$6.500</td><td class="num">$312.000</td></tr>
 <tr><td>Armado y hormigonado</td><td class="num">45 h</td><td class="num">Oficial</td><td class="num">$11.000</td><td class="num">$495.000</td></tr>
           </tbody></table></div>
-        <div class="acc-sub">Dirección y asistencia técnica · $182.000 · 14 h</div>
+        <div class="acc-sub">Dirección y asistencia técnica · $273.000 · 21 h</div>
         <div class="tablecard"><table><tbody>
-          <tr><td>Supervisión y control</td><td class="num">14 h</td><td class="num">$13.000</td><td class="num">$182.000</td></tr>
+          <tr><td>Supervisión y control (7 días × 3 h)</td><td class="num">21 h</td><td class="num">$13.000</td><td class="num">$273.000</td></tr>
         </tbody></table></div>
       </div>
     </details>
     <details class="acc">
       <summary>
         <span class="acc-name">Piso</span>
-        <span class="acc-total">$3.721.380</span>
+        <span class="acc-total">$3.825.380</span>
       </summary>
       <div class="acc-body">
         <div class="acc-sub">Materiales · $3.119.380</div>
@@ -302,16 +280,16 @@
           <tbody>
 <tr><td>Armado plataforma</td><td class="num">50 h</td><td class="num">Oficial</td><td class="num">$11.000</td><td class="num">$550.000</td></tr>
           </tbody></table></div>
-        <div class="acc-sub">Dirección y asistencia técnica · $52.000 · 4 h</div>
+        <div class="acc-sub">Dirección y asistencia técnica · $156.000 · 12 h</div>
         <div class="tablecard"><table><tbody>
-          <tr><td>Supervisión y control</td><td class="num">4 h</td><td class="num">$13.000</td><td class="num">$52.000</td></tr>
+          <tr><td>Supervisión y control (4 días × 3 h)</td><td class="num">12 h</td><td class="num">$13.000</td><td class="num">$156.000</td></tr>
         </tbody></table></div>
       </div>
     </details>
     <details class="acc">
       <summary>
         <span class="acc-name">Columnas</span>
-        <span class="acc-total">$1.073.000</span>
+        <span class="acc-total">$1.125.000</span>
       </summary>
       <div class="acc-body">
         <div class="acc-sub">Materiales · $568.000</div>
@@ -325,16 +303,16 @@
           <tbody>
 <tr><td>Izado, aplome, anclaje</td><td class="num">40 h</td><td class="num">Oficial</td><td class="num">$11.000</td><td class="num">$440.000</td></tr>
           </tbody></table></div>
-        <div class="acc-sub">Dirección y asistencia técnica · $65.000 · 5 h</div>
+        <div class="acc-sub">Dirección y asistencia técnica · $117.000 · 9 h</div>
         <div class="tablecard"><table><tbody>
-          <tr><td>Supervisión y control</td><td class="num">5 h</td><td class="num">$13.000</td><td class="num">$65.000</td></tr>
+          <tr><td>Supervisión y control (3 días × 3 h)</td><td class="num">9 h</td><td class="num">$13.000</td><td class="num">$117.000</td></tr>
         </tbody></table></div>
       </div>
     </details>
     <details class="acc">
       <summary>
         <span class="acc-name">Techo</span>
-        <span class="acc-total">$8.795.073</span>
+        <span class="acc-total">$8.873.073</span>
       </summary>
       <div class="acc-body">
         <div class="acc-sub">Materiales · $7.796.073</div>
@@ -350,16 +328,16 @@
 <tr><td>Vigas, cabios, estructura</td><td class="num">55 h</td><td class="num">Oficial</td><td class="num">$11.000</td><td class="num">$605.000</td></tr>
 <tr><td>Chapa y aislación</td><td class="num">28 h</td><td class="num">Semi-oficial</td><td class="num">$8.500</td><td class="num">$238.000</td></tr>
           </tbody></table></div>
-        <div class="acc-sub">Dirección y asistencia técnica · $156.000 · 12 h</div>
+        <div class="acc-sub">Dirección y asistencia técnica · $234.000 · 18 h</div>
         <div class="tablecard"><table><tbody>
-          <tr><td>Supervisión y control</td><td class="num">12 h</td><td class="num">$13.000</td><td class="num">$156.000</td></tr>
+          <tr><td>Supervisión y control (6 días × 3 h)</td><td class="num">18 h</td><td class="num">$13.000</td><td class="num">$234.000</td></tr>
         </tbody></table></div>
       </div>
     </details>
     <details class="acc">
       <summary>
         <span class="acc-name">Paredes</span>
-        <span class="acc-total">$12.629.800</span>
+        <span class="acc-total">$13.643.800</span>
       </summary>
       <div class="acc-body">
         <div class="acc-sub">Materiales · $7.060.800</div>
@@ -377,27 +355,26 @@
 <tr><td>Relleno de barro</td><td class="num">52 h</td><td class="num">Peón</td><td class="num">$6.500</td><td class="num">$338.000</td></tr>
 <tr><td>Revoques</td><td class="num">312 h</td><td class="num">Semi-oficial</td><td class="num">$8.500</td><td class="num">$2.652.000</td></tr>
           </tbody></table></div>
-        <div class="acc-sub">Dirección y asistencia técnica · $507.000 · 39 h</div>
+        <div class="acc-sub">Dirección y asistencia técnica · $1.521.000 · 117 h</div>
         <div class="tablecard"><table><tbody>
-          <tr><td>Supervisión y control</td><td class="num">39 h</td><td class="num">$13.000</td><td class="num">$507.000</td></tr>
+          <tr><td>Supervisión y control (39 días × 3 h)</td><td class="num">117 h</td><td class="num">$13.000</td><td class="num">$1.521.000</td></tr>
         </tbody></table></div>
       </div>
     </details>
 
-
     <div class="grupo-head" style="border-left:4px solid var(--glass)">
-      <div><div class="grupo-t">Instalaciones</div><div class="grupo-s">Luz, agua y gas · profesionales propios, aparte del director</div></div>
-      <div class="grupo-amt">$3.576.000</div>
+      <div><div class="grupo-t">Instalaciones</div><div class="grupo-s">Luz, agua y gas · profesionales propios</div></div>
+      <div class="grupo-amt">$3.420.000</div>
     </div>
     <div class="grupo-desglose">
       <span>Materiales $2.400.000</span>
       <span>Mano de obra $1.020.000</span>
-      <span>Dirección $156.000</span>
+      
     </div>
     <details class="acc">
       <summary>
         <span class="acc-name">Instalaciones</span>
-        <span class="acc-total">$3.576.000</span>
+        <span class="acc-total">$3.420.000</span>
       </summary>
       <div class="acc-body">
         <div class="acc-sub">Materiales · $2.400.000</div>
@@ -410,52 +387,49 @@
         <div class="tablecard"><table>
           <thead><tr><th>Tarea</th><th class="num">Horas</th><th class="num">Nivel</th><th class="num">Valor/h</th><th class="num">Subtotal</th></tr></thead>
           <tbody>
-<tr><td>Tendido (con especialista)</td><td class="num">120 h</td><td class="num">Semi-oficial</td><td class="num">$8.500</td><td class="num">$1.020.000</td></tr>
+<tr><td>Tendido (profesionales propios)</td><td class="num">120 h</td><td class="num">Especialista</td><td class="num">$8.500</td><td class="num">$1.020.000</td></tr>
           </tbody></table></div>
-        <div class="acc-sub">Dirección y asistencia técnica · $156.000 · 12 h</div>
-        <div class="tablecard"><table><tbody>
-          <tr><td>Supervisión y control</td><td class="num">12 h</td><td class="num">$13.000</td><td class="num">$156.000</td></tr>
-        </tbody></table></div>
+        <div class="acc-sub">Dirección y asistencia técnica</div>
+        <p class="muted" style="margin:4px 0">Sin dirección de obra: la ejecutan profesionales propios (electricista y gasista matriculados), coordinados por el propietario.</p>
       </div>
     </details>
 
-
     <div class="grupo-head" style="border-left:4px solid var(--moss)">
       <div><div class="grupo-t">Terminaciones</div><div class="grupo-s">Cerramientos internos y terminaciones</div></div>
-      <div class="grupo-amt">$11.113.300</div>
+      <div class="grupo-amt">$11.045.300</div>
     </div>
     <div class="grupo-desglose">
-      <span>Materiales $9.567.800</span>
-      <span>Mano de obra $1.402.500</span>
-      <span>Dirección $143.000</span>
+      <span>Materiales $9.259.800</span>
+      <span>Mano de obra $1.317.500</span>
+      <span>Dirección $468.000</span>
     </div>
     <details class="acc">
       <summary>
         <span class="acc-name">Cerramientos internos</span>
-        <span class="acc-total">$1.381.500</span>
+        <span class="acc-total">$1.131.500</span>
       </summary>
       <div class="acc-body">
-        <div class="acc-sub">Materiales · $777.000</div>
+        <div class="acc-sub">Materiales · $469.000</div>
         <div class="tablecard"><table><tbody>
-<tr><td>Durlock verde baño+pasillo</td><td class="num">30 m²</td><td class="num">$660.000</td></tr>
+<tr><td>Durlock verde baño</td><td class="num">16 m²</td><td class="num">$352.000</td></tr>
 <tr><td>Quincha seca dormitorio</td><td class="num"></td><td class="num">$117.000</td></tr>
         </tbody></table></div>
-        <div class="acc-sub">Mano de obra · $552.500 · 65 h</div>
+        <div class="acc-sub">Mano de obra · $467.500 · 55 h</div>
         <div class="tablecard"><table>
           <thead><tr><th>Tarea</th><th class="num">Horas</th><th class="num">Nivel</th><th class="num">Valor/h</th><th class="num">Subtotal</th></tr></thead>
           <tbody>
-<tr><td>Durlock + quincha seca</td><td class="num">65 h</td><td class="num">Semi-oficial</td><td class="num">$8.500</td><td class="num">$552.500</td></tr>
+<tr><td>Durlock baño + quincha dormitorio</td><td class="num">55 h</td><td class="num">Semi-oficial</td><td class="num">$8.500</td><td class="num">$467.500</td></tr>
           </tbody></table></div>
-        <div class="acc-sub">Dirección y asistencia técnica · $52.000 · 4 h</div>
+        <div class="acc-sub">Dirección y asistencia técnica · $195.000 · 15 h</div>
         <div class="tablecard"><table><tbody>
-          <tr><td>Supervisión y control</td><td class="num">4 h</td><td class="num">$13.000</td><td class="num">$52.000</td></tr>
+          <tr><td>Supervisión y control (5 días × 3 h)</td><td class="num">15 h</td><td class="num">$13.000</td><td class="num">$195.000</td></tr>
         </tbody></table></div>
       </div>
     </details>
     <details class="acc">
       <summary>
         <span class="acc-name">Terminaciones</span>
-        <span class="acc-total">$9.731.800</span>
+        <span class="acc-total">$9.913.800</span>
       </summary>
       <div class="acc-body">
         <div class="acc-sub">Materiales · $8.790.800</div>
@@ -470,22 +444,82 @@
           <tbody>
 <tr><td>Colocación y terminación</td><td class="num">100 h</td><td class="num">Semi-oficial</td><td class="num">$8.500</td><td class="num">$850.000</td></tr>
           </tbody></table></div>
-        <div class="acc-sub">Dirección y asistencia técnica · $91.000 · 7 h</div>
+        <div class="acc-sub">Dirección y asistencia técnica · $273.000 · 21 h</div>
         <div class="tablecard"><table><tbody>
-          <tr><td>Supervisión y control</td><td class="num">7 h</td><td class="num">$13.000</td><td class="num">$91.000</td></tr>
+          <tr><td>Supervisión y control (7 días × 3 h)</td><td class="num">21 h</td><td class="num">$13.000</td><td class="num">$273.000</td></tr>
         </tbody></table></div>
       </div>
     </details>
 
-
     <div class="grandtotal" style="margin-top:26px">
-      <div><div class="lbl">Total general</div><div class="sub">obra gris 66% · instalaciones 8% · terminaciones 26%</div></div>
-      <div class="amt">$42.926.671</div>
+      <div><div class="lbl">Total general</div><div class="sub">obra gris 67% · instalaciones 8% · terminaciones 25%</div></div>
+      <div class="amt">$43.668.601</div>
     </div>
+  </div>
 
-    <div class="note warn"><b>Para negociar la mano de obra:</b> la obra gris tiene <b>$7.780.000</b>
-    de mano de obra en <b>5 etapas</b>. Ese es el número a discutir con el director,
-    sin las terminaciones que lo inflarían.</div>
+  <!-- VISTA POR ETAPA -->
+  <div class="view" id="view-etapa">
+    <div class="tablecard"><table>
+      <thead><tr><th>Etapa</th><th class="num">Materiales</th><th class="num">Mano obra</th><th class="num">Dirección</th><th class="num">Total</th></tr></thead>
+      <tbody>
+          <tr><td>Fundación</td><td class="num">$656.048</td><td class="num">$807.000</td><td class="num">$273.000</td><td class="num">$1.736.048</td></tr>
+          <tr><td>Piso</td><td class="num">$3.119.380</td><td class="num">$550.000</td><td class="num">$156.000</td><td class="num">$3.825.380</td></tr>
+          <tr><td>Columnas</td><td class="num">$568.000</td><td class="num">$440.000</td><td class="num">$117.000</td><td class="num">$1.125.000</td></tr>
+          <tr><td>Techo</td><td class="num">$7.796.073</td><td class="num">$843.000</td><td class="num">$234.000</td><td class="num">$8.873.073</td></tr>
+          <tr><td>Paredes</td><td class="num">$7.060.800</td><td class="num">$5.062.000</td><td class="num">$1.521.000</td><td class="num">$13.643.800</td></tr>
+          <tr><td>Instalaciones</td><td class="num">$2.400.000</td><td class="num">$1.020.000</td><td class="num">—</td><td class="num">$3.420.000</td></tr>
+          <tr><td>Cerramientos</td><td class="num">$469.000</td><td class="num">$467.500</td><td class="num">$195.000</td><td class="num">$1.131.500</td></tr>
+          <tr><td>Terminaciones</td><td class="num">$8.790.800</td><td class="num">$850.000</td><td class="num">$273.000</td><td class="num">$9.913.800</td></tr>
+      </tbody>
+      <tfoot><tr><td>TOTAL</td><td class="num">$30.860.101</td><td class="num">$10.039.500</td><td class="num">$2.769.000</td><td class="num">$43.668.601</td></tr></tfoot>
+    </table></div>
+  </div>
+
+  <!-- VISTA SOLO MATERIALES -->
+  <div class="view" id="view-materiales">
+    <div class="grandtotal" style="margin-bottom:18px">
+      <div><div class="lbl">Total de materiales</div><div class="sub">sin mano de obra ni dirección</div></div>
+      <div class="amt">$30.860.101</div>
+    </div>
+    <p style="color:var(--ink2);max-width:70ch">Todos los materiales de la obra agrupados por tipo, para
+    comprar en bloque. La madera conviene pedirla toda junta (lote homogéneo).</p>
+    <div class="rubro-tot"><h3>Madera de pino</h3><span class="v">$5.960.773</span></div>
+    <div class="tablecard"><table><tbody>
+<tr><td>2"×4" (bastidor, soleras)</td><td class="num">465 ml</td><td class="num">$1.953.000</td></tr>
+<tr><td>2"×6" (cabios, antepechos)</td><td class="num">150 ml</td><td class="num">$1.242.000</td></tr>
+<tr><td>2"×8" (vigas piso, maestras)</td><td class="num">153 ml</td><td class="num">$1.447.380</td></tr>
+<tr><td>2"×12" (vigas de techo)</td><td class="num">13 tablas</td><td class="num">$1.318.393</td></tr>
+    </tbody></table></div>
+    <div class="rubro-tot"><h3>Rollizo (columnas)</h3><span class="v">$270.000</span></div>
+    <div class="tablecard"><table><tbody>
+<tr><td>Ø20 × 4 m</td><td class="num">6 u</td><td class="num">$270.000</td></tr>
+    </tbody></table></div>
+    <div class="rubro-tot"><h3>Tableros</h3><span class="v">$2.764.000</span></div>
+    <div class="tablecard"><table><tbody>
+<tr><td>Fenólico 18 mm (piso)</td><td class="num">16 placas</td><td class="num">$992.000</td></tr>
+<tr><td>Fenólico 12 mm (diafragma, muros)</td><td class="num">19 placas</td><td class="num">$836.000</td></tr>
+<tr><td>Machimbre 1/2"</td><td class="num">52 m²</td><td class="num">$936.000</td></tr>
+    </tbody></table></div>
+    <div class="rubro-tot"><h3>Quincha</h3><span class="v">$4.472.500</span></div>
+    <div class="tablecard"><table><tbody>
+<tr><td>Caña de Castilla</td><td class="num">1.350 u</td><td class="num">$3.375.000</td></tr>
+<tr><td>Paja, cal, arena, boro</td><td class="num"></td><td class="num">$1.097.500</td></tr>
+<tr><td>Bastidor y fenólico (en madera/tableros)</td><td class="num"></td><td class="num">—</td></tr>
+    </tbody></table></div>
+    <div class="rubro-tot"><h3>Hormigón y acero</h3><span class="v">$656.048</span></div>
+    <div class="tablecard"><table><tbody>
+<tr><td>Hormigón H-21</td><td class="num">1,69 m³</td><td class="num">$312.576</td></tr>
+<tr><td>Acero ADN-420</td><td class="num">91 kg</td><td class="num">$199.472</td></tr>
+<tr><td>Brocas Ø12</td><td class="num">12 u</td><td class="num">$144.000</td></tr>
+    </tbody></table></div>
+    <div class="rubro-tot"><h3>Cubierta</h3><span class="v">$3.591.500</span></div>
+    <div class="tablecard"><table><tbody>
+<tr><td>Chapa trapezoidal C25</td><td class="num">74 m²</td><td class="num">$2.072.000</td></tr>
+<tr><td>Zinguería</td><td class="num">28 ml</td><td class="num">$616.000</td></tr>
+<tr><td>Celulosa, membranas</td><td class="num"></td><td class="num">$903.500</td></tr>
+    </tbody></table></div>
+    <div class="note"><b>Materiales de obra gris:</b> $19.200.301 de los $30.860.101 totales.
+    Es la mayor parte de la inversión en materiales.</div>
   </div>
 
   <!-- VISTA NIVELES DE MANO DE OBRA -->
@@ -497,16 +531,16 @@
       <thead><tr><th>Nivel</th><th class="num">Valor/h est.</th><th>Tareas que realiza</th></tr></thead>
       <tbody>
         <tr><td><b>Peón</b></td><td class="num">$6.500</td><td>Excavación, encañado, relleno de barro, ayudantía. Fuerza y volumen, no requiere oficio.</td></tr>
-        <tr><td><b>Semi-oficial</b></td><td class="num">$8.500</td><td>Revoques, colocación de chapa, instalaciones asistidas, terminaciones. Requiere mano pero se aprende.</td></tr>
-        <tr><td><b>Oficial</b></td><td class="num">$11.000</td><td>Fundación, hormigón, estructura de madera, techo, bastidor. Precisión y oficio: un error se copia a toda la casa.</td></tr>
-        <tr><td><b>Especialista</b></td><td class="num">a cotizar</td><td>Gas y electricidad. Requieren matrícula y firma. Se cotizan por trabajo, no por hora.</td></tr>
+        <tr><td><b>Semi-oficial</b></td><td class="num">$8.500</td><td>Revoques, colocación de chapa, cerramientos internos, terminaciones. Requiere mano pero se aprende.</td></tr>
+        <tr><td><b>Oficial</b></td><td class="num">$11.000</td><td>Fundación, hormigón, estructura de madera, techo, bastidor. Precisión y oficio.</td></tr>
+        <tr><td><b>Especialista</b></td><td class="num">a cotizar</td><td>Gas y electricidad. Requieren matrícula y firma. Se cotizan por trabajo.</td></tr>
       </tbody>
     </table></div>
     <div class="note"><b>Dónde conviene ahorrar y dónde no.</b> En trabajo de peón (barro, excavación) se puede buscar
     lo más económico sin riesgo: es esfuerzo, no precisión. En trabajo de oficial (fundación, techo, columnas) no
     conviene ahorrar de más: ahí un error se paga carísimo.</div>
     <p class="muted">Los valores de mano de obra en Argentina se mueven rápido con la inflación. Conviene confirmarlos
-    con una o dos changas reales en la zona antes de cerrar el presupuesto.</p>
+    con una o dos changas reales en la zona.</p>
   </div>
 
   <div class="note warn"><b>Valores estimados de referencia · Córdoba Capital · septiembre 2026.</b> No incluye terreno,
